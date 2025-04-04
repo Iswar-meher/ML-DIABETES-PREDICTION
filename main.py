@@ -39,8 +39,8 @@ for f in features:
             print("❌ Invalid input. Please enter a number.")
 
 # Predict
-user_input_np = np.asarray(user_input).reshape(1, -1)
-user_input_scaled = scaler.transform(user_input_np)
+user_input_df = pd.DataFrame([user_input], columns=features)# Wrap user input with feature names
+user_input_scaled = scaler.transform(user_input_df)# Standardize using scaler
 prediction = classifier.predict(user_input_scaled)
 
 # Display results
