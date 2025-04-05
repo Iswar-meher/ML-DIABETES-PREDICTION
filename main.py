@@ -49,8 +49,26 @@ print("**Diabetes Risk Prediction**")
 print("="*40)
 
 if prediction[0] == 0:
-    print("✅ **Great news! You are likely NOT diabetic.** 🎉")
-    print("   Keep up a healthy lifestyle and regular checkups. 👍")
+    print("✅ **Great news! You are likely NOT diabetic.** ")
+    print("   Keep up a healthy lifestyle and regular checkups. 👍\n\n")
 else:
     print("⚠️ **Caution! You may be at risk for diabetes.**")
-    print("   Please consult a doctor for further tests. 🩺")
+    print("   Please consult a doctor for further tests. \n\n")
+
+# Compare to dataset averages
+df_mean = diabetes_dataset[features].mean()
+for i, f in enumerate(features):
+    user_val = user_input[i]
+    avg_val = df_mean[f]
+    
+    if user_val > avg_val * 1.2:
+        status = "⬆️ HIGHER than average"
+    elif user_val < avg_val * 0.8:
+        status = "⬇️ LOWER than average"
+    else:
+        status = "✔️ NORMAL range"
+    
+    print(f"🔹 {f}: {user_val} (Avg: {avg_val:.2f}) → {status}")
+
+print("-" * 40)
+print("\n**Tip:** High glucose, BMI, or insulin levels may increase diabetes risk. \n   Consult a healthcare provider for personalized advice. 💙")
